@@ -6,6 +6,7 @@ const cors = require("cors");
 const { HoldingModel } = require("./models/HoldingModel");
 const { PositionsModel } = require("./models/PositionsModel");
 const { OrderModel } = require("./models/OrderModel");
+const { UserModel} = require("./models/UserModel");
 
 require("dotenv").config();
 const app = express();
@@ -198,7 +199,14 @@ app.get("/getPositions", async (req, res) => {
 app.get("/getOrders", async (req, res) => {
   let allOrders = await OrderModel.find({});
   res.json(allOrders);
-})
+});
+
+app.get("/getUser", async (req, res) => {
+  let allUser = await UserModel.find({});
+  res.json(allUser);
+});
+
+
 
 // For Buy feature
 app.post("/newOrder", async (req, res) => {
@@ -210,6 +218,15 @@ app.post("/newOrder", async (req, res) => {
   });
   newOrder.save();
   res.send("Order Placed!");
+});
+
+// For user feature
+app.post("/newUser", async (req, res) => {
+  let newUser = new UserModel({
+    email: req.body.email,
+    password: req.body.password,  });
+  newUser.save();
+  res.send("User Created!");
 });
 
 app.listen(port, () => {
