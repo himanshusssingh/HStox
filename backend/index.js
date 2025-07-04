@@ -1,11 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
+ const bodyParser = require("body-parser");
+ const cors = require("cors");
 
 const { HoldingModel } = require("./models/HoldingModel");
 const { PositionsModel } = require("./models/PositionsModel");
 
 require("dotenv").config();
 const app = express();
+app.use(cors());
+app.use(bodyParser.json())
 
 const port = process.env.PORT || 3001;
 const url = process.env.MONGO_URL;
@@ -178,6 +182,19 @@ const url = process.env.MONGO_URL;
 //   });
 //   res.send("Added!");
 // });
+
+
+//Fetching Data from atlas cloude
+app.get("/getHoldings", async (req, res) =>{
+  let allHoldings = await HoldingModel.find({});
+  res.json(allHoldings);
+})
+
+app.get("/getPositions", async (req, res) => {
+  let allPositions = await PositionsModel.find({})
+  res.json(allPositions);
+})
+
 
 app.listen(port, () => {
   console.log("Check!");
