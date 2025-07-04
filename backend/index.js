@@ -1,15 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
- const bodyParser = require("body-parser");
- const cors = require("cors");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const { HoldingModel } = require("./models/HoldingModel");
 const { PositionsModel } = require("./models/PositionsModel");
+const { OrderModel } = require("./models/OrderModel");
 
 require("dotenv").config();
 const app = express();
 app.use(cors());
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 const port = process.env.PORT || 3001;
 const url = process.env.MONGO_URL;
@@ -183,18 +184,33 @@ const url = process.env.MONGO_URL;
 //   res.send("Added!");
 // });
 
-
 //Fetching Data from atlas cloude
-app.get("/getHoldings", async (req, res) =>{
+app.get("/getHoldings", async (req, res) => {
   let allHoldings = await HoldingModel.find({});
   res.json(allHoldings);
-})
+});
 
 app.get("/getPositions", async (req, res) => {
-  let allPositions = await PositionsModel.find({})
+  let allPositions = await PositionsModel.find({});
   res.json(allPositions);
+});
+
+app.get("/getOrders", async (req, res) => {
+  let allOrders = await OrderModel.find({});
+  res.json(allOrders);
 })
 
+// For Buy feature
+app.post("/newOrder", async (req, res) => {
+  let newOrder = new OrderModel({
+    name: req.body.name,
+    qty: req.body.qty,
+    price: req.body.price,
+    mode: req.body.mode,
+  });
+  newOrder.save();
+  res.send("Order Placed!");
+});
 
 app.listen(port, () => {
   console.log("Check!");
