@@ -1,4 +1,5 @@
 import React from 'react';
+const isLogin = localStorage.getItem("isLogin") === "true";
 
 function Hero() {
     return ( 
@@ -9,7 +10,9 @@ function Hero() {
                 </div>
                 <h1 className='mt-5'>Invest in everything</h1>
                 <p>Online plateform to invest in stoks, derivatives, mutual funds and more</p>
-                <button className='btn btn-primary p-2 fs-5' style={{width:"15%", margin:"auto"}}>Sign up for free</button>
+                {!isLogin && (
+                    <button className='btn btn-primary p-2 fs-5' style={{width:"15%", margin:"auto"}}>Sign up for free</button>
+                )}
             </div>
         </div>
         

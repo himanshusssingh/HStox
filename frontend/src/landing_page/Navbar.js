@@ -1,4 +1,5 @@
 import React from 'react';
+const isLogin = localStorage.getItem("isLogin") === "true";
 
 function Navbar() {
     return ( 
@@ -15,9 +16,12 @@ function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse " id="navbarNav">
                   <ul className="navbar-nav">
-                    <li className="nav-item me-4">
+                    {!isLogin && (
+                      <li className="nav-item me-4">
                       <a className="nav-link active" aria-current="page" href="/signup">Signup</a>
                     </li>
+                    )}
+
                     <li className="nav-item me-4">
                       <a className="nav-link active" href="/about">About</a>
                     </li>

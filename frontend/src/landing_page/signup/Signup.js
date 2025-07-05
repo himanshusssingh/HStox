@@ -12,6 +12,7 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    localStorage.setItem("isLogin", "true");
     try {
       const response = await axios.post("http://localhost:3001/newUser", {
         email,
