@@ -12,14 +12,14 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem("isLogin", "true");
     try {
       const response = await axios.post("http://localhost:3001/newUser", {
         email,
         password,
       });
-      alert("You are logged in.");
+      localStorage.setItem("isLogin", "true");
       navigate("/");
+      alert("You are logged in.");
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -76,9 +76,8 @@ function Signup() {
           <br></br>
           <button type="submit" class="btn btn-primary">
             <Link className="btn btn-blue" onClick={handleSubmit}>
-                         Sign Up
-                      </Link>
-           
+              Sign Up
+            </Link>
           </button>
           <br />
           <br />

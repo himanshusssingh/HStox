@@ -16,11 +16,20 @@ function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse " id="navbarNav">
                   <ul className="navbar-nav">
+
                     {!isLogin && (
                       <li className="nav-item me-4">
                       <a className="nav-link active" aria-current="page" href="/signup">Signup</a>
                     </li>
                     )}
+                    {isLogin && (
+                      <li className="nav-item me-4">
+                        <a className="nav-link active" href="/" onClick={() => {
+                  localStorage.setItem("isLogin", "false");
+                }}>Logout</a>
+                      </li>
+                    )}
+                    
 
                     <li className="nav-item me-4">
                       <a className="nav-link active" href="/about">About</a>
