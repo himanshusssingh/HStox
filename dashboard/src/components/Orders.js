@@ -7,7 +7,7 @@ const Orders = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const response = await fetch("http://localhost:3001/getOrders");
+      const response = await fetch("http://localhost:3000/api/getOrders");
       const data = await response.json();
       setAllOrders(data);
     };
@@ -34,7 +34,7 @@ const Orders = () => {
       ) : (
         <div className="no-orders">
           <p>You haven't placed any orders today</p>
-          <Link to={"/"} className="btn">
+          <Link to={"/dashboard"} className="btn">
             Get started
           </Link>
         </div>

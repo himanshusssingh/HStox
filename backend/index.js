@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path")
 
 const { HoldingModel } = require("./models/HoldingModel");
 const { PositionsModel } = require("./models/PositionsModel");
@@ -13,8 +14,72 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 const url = process.env.MONGO_URL;
+
+// API routes
+app.get("/api/hello", (req, res) => {
+  res.json({ message: "Hello from backend!" });
+});
+
+// Serve static files from React frontend build folder
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+// React frontend route
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
+
+app.get("/signup", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
+
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
+
+app.get("/products", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
+
+app.get("/pricing", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
+
+app.get("/support", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
+
+
+
+// ==== Serve dashboard app ====
+app.use(express.static(path.join(__dirname, "../dashboard/build")));
+
+app.get("/dashboard", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dashboard/build/index.html"));
+});
+
+app.get("/dashboard/orders", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dashboard/build/index.html"));
+});
+
+app.get("/dashboard/holdings", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dashboard/build/index.html"));
+});
+
+app.get("/dashboard/positions", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dashboard/build/index.html"));
+});
+
+app.get("/dashboard/funds", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dashboard/build/index.html"));
+});
+
+app.get("/dashboard/apps", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dashboard/build/index.html"));
+});
+
+
 
 //Adding temp data for holdings
 // app.get("/addHoldings", async (req, res) => {
@@ -185,31 +250,55 @@ const url = process.env.MONGO_URL;
 //   res.send("Added!");
 // });
 
+
+
 //Fetching Data from atlas cloude
-app.get("/getHoldings", async (req, res) => {
+
+
+
+app.get("/api/getHoldings", async (req, res) => {
+  try {
   let allHoldings = await HoldingModel.find({});
   res.json(allHoldings);
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).send("Error creating user");
+  }
 });
 
-app.get("/getPositions", async (req, res) => {
+app.get("/api/getPositions", async (req, res) => {
+  try {
   let allPositions = await PositionsModel.find({});
   res.json(allPositions);
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).send("Error creating user");
+  }
 });
 
-app.get("/getOrders", async (req, res) => {
+app.get("/api/getOrders", async (req, res) => {
+  try {
   let allOrders = await OrderModel.find({});
   res.json(allOrders);
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).send("Error creating user");
+  }
 });
 
-app.get("/getUser", async (req, res) => {
+app.get("/api/getUser", async (req, res) => {
+  try {
   let allUser = await UserModel.find({});
   res.json(allUser);
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).send("Error creating user");
+  }
 });
 
-
-
-// For Buy feature
-app.post("/newOrder", async (req, res) => {
+//For Buy feature
+app.post("/api/newOrder", async (req, res) => {
+  try {
   let newOrder = new OrderModel({
     name: req.body.name,
     qty: req.body.qty,
@@ -218,19 +307,41 @@ app.post("/newOrder", async (req, res) => {
   });
   newOrder.save();
   res.send("Order Placed!");
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).send("Error creating user");
+  }
 });
 
 // For user feature
-app.post("/newUser", async (req, res) => {
+app.post("/api/newUser", async (req, res) => {
+  try {
   let newUser = new UserModel({
     email: req.body.email,
     password: req.body.password,  });
   newUser.save();
   res.send("User Created!");
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).send("Error creating user");
+  }
 });
 
+
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+// });
+
+
+
 app.listen(port, () => {
-  console.log("Check!");
-  mongoose.connect(url);
-  console.log("Database Connected!");
+  console.log("Server is running on port", port);
+  mongoose.connect(url)
+  .then(() => {
+    console.log("Connected to MongoDB Atlas!")
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB Atlas:", err);
+  });
 });
