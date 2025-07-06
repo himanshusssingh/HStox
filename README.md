@@ -6,120 +6,104 @@
 
 ## 🚀 Features
 
-- 📊 Real-time stock data fetching and display
+- 📊 Stock data fetching from cloud and display
 - 🧠 Clean and user-friendly dashboard
 - 🧩 Modular architecture (Frontend, Backend, Dashboard)
-- 📡 API Integration with financial data providers
-- 🔒 Secure backend with authentication (if implemented)
 - ⚙️ Responsive design for all devices
+- 📈 Graphs or charts for stock history?
+- 🔐 User login/signup or authentication?
+- 📝 Watchlist or favorites feature?
+- 🧾 Transaction history or portfolio tracker?
+- 🧮 Financial indicators (like moving average)?
 
 ---
 
 ## 📁 Folder Structure
 
-HStox/
-│
-├── frontend/ # React frontend for UI/UX
-├── backend/ # Express backend with API and DB logic
-├── dashboard/ # Specialized dashboard for advanced analytics
-└── README.md # Project documentation
+- HStox/
+- │
+- ├── frontend/ # React frontend for UI/UX
+- ├── backend/ # Express backend with API and DB logic
+- ├── dashboard/ # Specialized dashboard for advanced analytics
+- └── README.md # Project documentation
 
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React.js, TailwindCSS / CSS
+- **Frontend:** React.js, Bootstrap / CSS
 - **Backend:** Node.js, Express.js
-- **Database:** MongoDB (via Mongoose)
-- **API:** Integration with stock data APIs
-- **Other Tools:** Git, GitHub, Postman, Render (for deployment)
+- **Database:** MongoDB (via Mongoose), Atlas Cloud
+- **Other Tools:** Git, GitHub, Cors, Body-Parser
 
 ---
 
 ## 🧑‍💻 Installation & Setup
 
-1. **Clone the repo**
+### 1. Clone the repo
 
 ```bash
 git clone https://github.com/your-username/HStox.git
-cd HStox
+```
+***cd HStox***
 
-Install dependencies
+### 2. Install dependencies
 
-For frontend:
-cd frontend
-npm install
+***For frontend:***
+- cd frontend
+- npm install
 
-For backend:
-
-bash
-Copy
-Edit
-cd ../backend
-npm install
-For dashboard:
-
-bash
-Copy
-Edit
-cd ../dashboard
-npm install
-Setup Environment Variables
-
-Create a .env file inside the backend/ directory with the following variables:
-
-env
-Copy
-Edit
+***For backend:***
+- cd backend
+- npm install
+  
+***For dashboard:***
+- cd dashboard
+- npm install
+  
+### 3. Setup Environment Variables
+- Create a .env file inside the backend/ directory with the following variables:
+```bash
 MONGO_URI=your_mongodb_connection_string
-PORT=5000
-API_KEY=your_stock_api_key
-Run the development servers
+```
 
-Backend:
+## Run the development servers
 
-bash
-Copy
-Edit
-cd backend
-nodemon index.js
-Frontend:
+***Backend:***
+- cd backend
+- nodemon index.js
+  
+***Frontend:***
+- cd frontend
+- npm start
+  
+***Dashboard:***
+- cd dashboard
+- npm start
 
-bash
-Copy
-Edit
-cd frontend
-npm start
-Dashboard:
-
-bash
-Copy
-Edit
-cd dashboard
-npm start
-🌐 Deployment
+  
+## 🌐 Deployment
 HStox is deployable on platforms like Render, Vercel, or Netlify for frontend, and Render or Railway for backend.
 
 Make sure to:
 
-Set proper environment variables in your deployment dashboard.
+- Set proper environment variables in your deployment dashboard.
 
-Use production builds (npm run build) for the frontend/dashboard.
+- Use production builds (npm run build) for the frontend/dashboard.
 
-📸 Screenshots
-You can add screenshots here to showcase your app interface.
 
-🤝 Contributing
+## 🤝 Contributing
 Contributions, issues, and feature requests are welcome!
 Feel free to check the issues page.
 
-📄 License
+## 📄 License
 This project is licensed under the MIT License.
 
-🙋‍♂️ Author
+## 🙋‍♂️ Author
 Made with ❤️ by Himanshu Singh
 
-GitHub: @your-username
-
-LinkedIn: Your Profile
+## LinkedIn: 
+```bash
+https://www.linkedin.com/in/himanshu-singh-325438291/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BlPxH7iw%2BQjK4RnvJSKi9sQ%3D%3D
+```
